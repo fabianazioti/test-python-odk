@@ -5,5 +5,8 @@ def hello_world():
     return 'Hello, World!'
 
 @app.route('/base')
-def hello_world():
+def base():
     return 'Hello Goku!'
+
+if __name__ == '__main__':
+    app.run(debug=True)

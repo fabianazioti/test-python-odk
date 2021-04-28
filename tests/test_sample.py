@@ -1,13 +1,16 @@
 import pytest
-import os
-from flask import Flask
+
+from teste import app as flask_app
 
 
-class Test:
+@pytest.fixture
+def app():
+    yield flask_app
 
-    def test_base(self):
-        app = Flask(__name__)
-        client = app.test_client()
-        response = client.get('/base')
+@pytest.fixture
+def client(app):
+    return app.test_client()
 
-        assert 0 == 0
+def test_index(app, client):
+    res = client.get('/')
+    assert res.status_code == 200
