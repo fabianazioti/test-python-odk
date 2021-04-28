@@ -18,7 +18,7 @@ setup_requires = [
 ]
 
 install_requires = [
-    
+    'flask',
 ]
 
 packages = find_packages()

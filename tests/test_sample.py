@@ -1,12 +1,13 @@
-import subprocess
-import sys
+import pytest
+import os
+from flask import Flask
 
-def test_module():
-    res = subprocess.call(f'{sys.executable} -m teste', shell=True)
 
-    assert res == 0
+class Test:
 
-if __name__ == '__main__':
-    import pytest
+    def test_base(self):
+        app = Flask(__name__)
+        client = app.test_client()
+        response = client.get('/base')
 
-    pytest.main()
+        assert 0 == 0
