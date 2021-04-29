@@ -1,2 +1,0 @@
-APP_CONFIG=teste/config.py
-APP_MODULE=teste:app
