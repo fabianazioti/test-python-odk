@@ -13,9 +13,6 @@ extras_require = {
 
 extras_require['all'] = [ req for exts, reqs in extras_require.items() for req in reqs ]
 
-setup_requires = [
-    'pytest-runner>=5.2',
-]
 
 install_requires = [
     'flask',
@@ -29,5 +26,4 @@ setup(
     extras_require=extras_require,
     install_requires=install_requires,
     setup_requires=setup_requires,
-    tests_require=tests_require,
 )
