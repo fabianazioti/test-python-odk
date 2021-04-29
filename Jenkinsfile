@@ -1,18 +1,9 @@
 pipeline {
-    agent any
-    stages {
-    stage('Build') {
-        steps {
-            script {
-                openshift.startBuild("test-python-odk").logs('-f')
-            }
-        }
+    agent none
+    stage('build') {
+      openshiftBuild(buildConfig: 'test-python-odk', showBuildLogs: 'true')
     }
-    stage('Test') {
-        steps {
-        sh "curl -s -X GET http://flask-dev:8080/health"
-        sh "curl -s http://flask-dev-project3.apps.demo.li9.com/ | grep Hello"
-        }
-    }
+    stage('deploy') {
+      openshiftDeploy(deploymentConfig: 'nodejs-mongodb-example')
     }
 }
