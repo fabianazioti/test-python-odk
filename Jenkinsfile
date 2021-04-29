@@ -1,17 +1,16 @@
-try {
-   timeout(time: 20, unit: 'MINUTES') {
-      node('python') {
-          stage('build') {
-            openshiftBuild(buildConfig: 'jenkins', showBuildLogs: 'true')
-          }
-          stage('deploy') {
-            openshiftDeploy(deploymentConfig: 'jenkins')
-          }
+pipeline {
+    agent any
+    stages {
+    stage('Build') {
+        steps {
+            script {
+                openshift.withCluster() {
+                    openshift.withProject() {
+                        openshift.startBuild("test-python-odk").logs('-f')
+                    }
+                }
+            }
         }
-   }
-} catch (err) {
-   echo "in catch block"
-   echo "Caught: ${err}"
-   currentBuild.result = 'FAILURE'
-   throw err
+    }
+    }
 }
